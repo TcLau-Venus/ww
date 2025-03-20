@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WanderWise.ai - Revolutionizing Adventure Travel</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles_aboutus.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+  </head>
+  <body
+    x-data="wanderWiseApp()"
+    x-init="setInterval(() => rotateTestimonials(), 5000)"
+    :class="isDarkMode ? 'dark-mode' : 'light-mode'"
+  >
+    <!-- Navigation -->
+    <nav class="main-nav" :class="isDarkMode ? 'dark' : 'light'">
+      <div class="nav-container">
+        <div class="logo-container">
+          <img
+            src="https://placehold.co/32x32"
+            alt="WanderWise.ai logo"
+            class="logo-image"
+          />
+          <h1 class="logo-text">WanderWise.ai</h1>
+        </div>
+
+        <div class="desktop-menu">
+          <nav class="menu-links">
+            <a
+              href="index_aboutus.html"
+              class="menu-link"
+              :class="isDarkMode ? 'dark' : 'light'"
+              x-text="translations[language].nav.aboutUs"
+            ></a>
+            <a
+              href="index_services.html"
+              class="menu-link"
+              :class="isDarkMode ? 'dark' : 'light'"
+              x-text="translations[language].nav.services"
+            ></a>
+          </nav>
+
+          <div class="nav-controls">
+            <div class="theme-language-controls">
+              <button
+                class="theme-toggle"
+                :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+                @click="toggleTheme()"
+              >
+                <span x-show="isDarkMode">🌞</span>
+                <span x-show="!isDarkMode">🌙</span>
+              </button>
+
+              <button
+                class="language-toggle"
+                aria-label="Switch language"
+                @click="toggleLanguage()"
+              >
+                <span x-show="language === 'en'">中文</span>
+                <span x-show="language !== 'en'">EN</span>
+              </button>
+            </div>
+
+            <button
+              class="cta-button"
+              x-text="translations[language].nav.getStarted"
+            ></button>
+          </div>
+        </div>
+
+        <button
+          class="mobile-menu-toggle"
+          aria-label="Toggle navigation menu"
+          @click="toggleMobileMenu()"
+          :class="isDarkMode ? 'dark' : 'light'"
+        >
+          <div class="hamburger" :class="isMobileMenuOpen ? 'open' : ''">
+            <span :class="isDarkMode ? 'dark' : 'light'"></span>
+            <span :class="isDarkMode ? 'dark' : 'light'"></span>
+            <span :class="isDarkMode ? 'dark' : 'light'"></span>
+          </div>
+        </button>
+
+        <div
+          class="mobile-menu-overlay"
+          :class="isMobileMenuOpen ? 'open' : ''"
+          :style="{ backgroundColor: isDarkMode ? '#121212' : '#ffffff' }"
+        >
+          <div
+            class="mobile-menu"
+            :class="isDarkMode ? 'dark' : 'light'"
+            :style="{ transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(-100%)' }"
+          >
+            <div class="mobile-menu-content">
+              <div
+                class="mobile-menu-header"
+                :class="isDarkMode ? 'dark-border' : 'light-border'"
+              >
+                <div class="mobile-logo">
+                  <img
+                    src="https://placehold.co/32x32"
+                    alt="WanderWise.ai logo"
+                    class="mobile-logo-image"
+                  />
+                  <span
+                    class="mobile-logo-text"
+                    :class="isDarkMode ? 'dark' : 'light'"
+                    >WanderWise.ai</span
+                  >
+                </div>
+
+                <button
+                  class="close-menu"
+                  aria-label="Close menu"
+                  @click="toggleMobileMenu()"
+                  :class="isDarkMode ? 'dark' : 'light'"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="close-icon"
+                    :stroke="isDarkMode ? '#FFFFFF' : '#000000'"
+                    :style="{ filter: isDarkMode ? 'drop-shadow(0 0 2px rgba(255,255,255,0.3))' : 'none' }"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="mobile-menu-links">
+                <a
+                  href="index_aboutus.html"
+                  class="mobile-menu-link"
+                  :class="isDarkMode ? 'dark' : 'light'"
+                  @click="toggleMobileMenu()"
+                  x-text="translations[language].nav.aboutUs"
+                ></a>
+                <a
+                  href="index_home.html"
+                  class="mobile-menu-link"
+                  :class="isDarkMode ? 'dark' : 'light'"
+                  @click="toggleMobileMenu()"
+                  x-text="translations[language].nav.services"
+                ></a>
+              </div>
+
+              <div
+                class="mobile-controls"
+                :class="isDarkMode ? 'dark-border' : 'light-border'"
+              >
+                <button
+                  class="mobile-theme-toggle"
+                  :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+                  @click="toggleTheme()"
+                  :class="isDarkMode ? 'dark' : 'light'"
+                >
+                  <span x-show="isDarkMode">🌞</span>
+                  <span x-show="!isDarkMode">🌙</span>
+                </button>
+
+                <button
+                  class="mobile-language-toggle"
+                  aria-label="Switch language"
+                  @click="toggleLanguage()"
+                  :class="isDarkMode ? 'dark' : 'light'"
+                >
+                  <span x-show="language === 'en'">中文</span>
+                  <span x-show="language !== 'en'">EN</span>
+                </button>
+              </div>
+
+              <button
+                class="mobile-cta-button"
+                @click="toggleMobileMenu()"
+                x-text="translations[language].nav.getStarted"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <h2 class="section-title">Revolutionizing Adventure Travel</h2>
+        <p class="section-description">
+          At WanderWise.ai, we believe everyone deserves to experience the
+          perfect adventure. Our mission is to combine artificial intelligence
+          with human expertise to create personalized travel experiences that
+          inspire, challenge, and transform.
+        </p>
+
+        <div class="values-grid">
+          <div class="value-card" :class="isDarkMode ? 'dark' : 'light'">
+            <h3 class="value-title">Our Vision</h3>
+            <p class="value-description">
+              To become the world's most trusted AI-powered travel companion,
+              making outdoor adventures accessible and memorable for everyone.
+            </p>
+          </div>
+
+          <div class="value-card" :class="isDarkMode ? 'dark' : 'light'">
+            <h3 class="value-title">Our Values</h3>
+            <p class="value-description">
+              Innovation, sustainability, and authenticity guide everything we
+              do. We're committed to preserving the natural world while helping
+              people explore it.
+            </p>
+          </div>
+
+          <div class="value-card" :class="isDarkMode ? 'dark' : 'light'">
+            <h3 class="value-title">Our Impact</h3>
+            <p class="value-description">
+              We've helped thousands of travelers discover their perfect trails
+              while promoting responsible tourism and supporting local
+              communities.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section
+      id="team"
+      class="team-section"
+      :class="isDarkMode ? 'dark' : 'light'"
+    >
+      <div class="container">
+        <h2 class="section-title">Meet Our Team</h2>
+      </div>
+
+      <div class="team-grid">
+        <template x-for="(member, index) in teamMembers" :key="index">
+          <div class="team-card" :class="isDarkMode ? 'dark' : 'light'">
+            <img :src="member.image" :alt="member.name" class="team-image" />
+            <h3 class="team-name" x-text="member.name"></h3>
+            <p
+              class="team-role"
+              :class="isDarkMode ? 'dark' : 'light'"
+              x-text="member.role"
+            ></p>
+            <p
+              class="team-bio"
+              :class="isDarkMode ? 'dark' : 'light'"
+              x-text="member.bio"
+            ></p>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+      <div class="story-grid">
+        <div class="story-content">
+          <h2 class="section-title">Our Story</h2>
+
+          <div class="story-text">
+            <p class="story-paragraph">
+              Founded in 2023, WanderWise.ai emerged from a simple observation:
+              while travel planning tools were abundant, none truly understood
+              the individual needs and aspirations of adventure seekers.
+            </p>
+
+            <p class="story-paragraph">
+              Our founder, Alexandra Chen, experienced this firsthand during her
+              years of solo travel. Despite extensive research, she often found
+              herself on trails that didn't match her skill level or
+              preferences.
+            </p>
+
+            <p class="story-paragraph">
+              Combining her expertise in AI with her passion for outdoor
+              adventures, she assembled a team of technology experts and
+              seasoned travelers to create WanderWise.ai - a platform that
+              understands not just where you want to go, but why you want to go
+              there.
+            </p>
+          </div>
+
+          <div class="stats-container">
+            <div class="stat-item">
+              <h4 class="stat-number">50K+</h4>
+              <p class="stat-label">Active Users</p>
+            </div>
+
+            <div class="stat-item">
+              <h4 class="stat-number">1000+</h4>
+              <p class="stat-label">Trails Mapped</p>
+            </div>
+
+            <div class="stat-item">
+              <h4 class="stat-number">98%</h4>
+              <p class="stat-label">Success Rate</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-image-container">
+          <img
+            src="https://placehold.co/600x800"
+            alt="Our journey"
+            class="story-image"
+          />
+          <div class="established-badge">Est. 2023</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer" :class="isDarkMode ? 'dark' : 'light'">
+      <div class="container">
+        <div class="footer-content">
+          <p class="copyright">
+            © 2025 WanderWise.ai.hk. All rights reserved.
+          </p>
+
+          <div class="footer-links">
+            <a href="/privacy" class="footer-link"></a>
+            <a href="/terms" class="footer-link"></a>
+            <a href="/contact" class="footer-link">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function wanderWiseApp() {
+        return {
+          isMobileMenuOpen: false,
+          currentTestimonial: 0,
+          isDarkMode: false,
+          language: "en",
+          teamMembers: [
+            {
+              name: "Alexandra Chen",
+              role: "Founder & CEO",
+              bio: "Former AI researcher with a passion for outdoor adventures. Founded WanderWise to make adventure travel more accessible and personalized.",
+              image: "https://placehold.co/400x400",
+            },
+            {
+              name: "Marcus Rodriguez",
+              role: "Chief Technology Officer",
+              bio: "AI and machine learning expert with 15 years of experience. Leads the development of our recommendation engine.",
+              image: "https://placehold.co/400x400",
+            },
+            {
+              name: "Sarah O'Connor",
+              role: "Head of User Experience",
+              bio: "Former adventure guide turned UX designer. Ensures our platform is intuitive and user-friendly for all skill levels.",
+              image: "https://placehold.co/400x400",
+            },
+            {
+              name: "David Patel",
+              role: "Head of Partnerships",
+              bio: "Travel industry veteran with extensive connections. Builds relationships with local guides and service providers worldwide.",
+              image: "https://placehold.co/400x400",
+            },
+          ],
+          testimonials: [
+            {
+              name: "Sarah Mitchell",
+              role: "Adventure Enthusiast",
+              quote:
+                "WanderWise helped me discover hidden gems I never would have found on my own. The AI recommendations were spot-on!",
+              avatar: "https://placehold.co/100x100",
+            },
+            {
+              name: "James Cooper",
+              role: "Hiking Expert",
+              quote:
+                "As someone who hikes frequently, I'm impressed by the accuracy of the personalized trail suggestions.",
+              avatar: "https://placehold.co/100x100",
+            },
+            {
+              name: "Emma Thompson",
+              role: "Travel Blogger",
+              quote:
+                "The local insights feature is a game-changer. It's like having a local guide in your pocket.",
+              avatar: "https://placehold.co/100x100",
+            },
+          ],
+          features: [
+            {
+              title: "Personalized Itineraries",
+              description:
+                "AI-powered recommendations based on your preferences and experience level",
+              icon: "🎯",
+            },
+            {
+              title: "Travel Budget Management",
+              description:
+                "Smart tools to plan and track your adventure expenses",
+              icon: "💰",
+            },
+            {
+              title: "Local Insights",
+              description: "Access to hidden gems and local recommendations",
+              icon: "🗺️",
+            },
+          ],
+          translations: {
+            en: {
+              nav: {
+                aboutUs: "About Us",
+                services: "Services",
+                contactUs: "Contact Us",
+                legal: "Legal",
+                getStarted: "Get Started",
+              },
+              hero: {
+                title: "Plan Your Dream Trip with AI-Powered Recommendations",
+                subtitle:
+                  "Discover personalized itineraries and local insights.",
+                cta: "Get Started",
+              },
+              features: {
+                title: "Why Choose WanderWise",
+              },
+              testimonials: {
+                title: "What Our Adventurers Say",
+              },
+              cta: {
+                title: "Ready to Start Your Journey?",
+                subtitle:
+                  "Join thousands of adventurers discovering their perfect trails with WanderWise.",
+                button: "Start Planning Now",
+              },
+              footer: {
+                copyright: "© 2023 WanderWise.ai. All rights reserved.",
+                privacy: "Privacy Policy",
+                terms: "Terms of Service",
+                contact: "Contact",
+              },
+            },
+            zh: {
+              nav: {
+                aboutUs: "关于我们",
+                services: "服务",
+                contactUs: "联系我们",
+                legal: "法律条款",
+                getStarted: "立即开始",
+              },
+              hero: {
+                title: "通过AI驱动的推荐规划您的梦想之旅",
+                subtitle: "发现个性化行程和当地见解",
+                cta: "立即开始",
+              },
+              features: {
+                title: "为什么选择 WanderWise",
+              },
+              testimonials: {
+                title: "冒险者们的评价",
+              },
+              cta: {
+                title: "准备开始您的旅程？",
+                subtitle: "加入数千名使用 WanderWise 探索完美路线的冒险者",
+                button: "现在开始规划",
+              },
+              footer: {
+                copyright: "© 2023 WanderWise.ai. 保留所有权利。",
+                privacy: "隐私政策",
+                terms: "服务条款",
+                contact: "联系我们",
+              },
+            },
+          },
+          toggleTheme() {
+            this.isDarkMode = !this.isDarkMode;
+            document.documentElement.classList.toggle("dark");
+          },
+          toggleLanguage() {
+            this.language = this.language === "en" ? "zh" : "en";
+          },
+          toggleMobileMenu() {
+            this.isMobileMenuOpen = !this.isMobileMenuOpen;
+          },
+          rotateTestimonials() {
+            this.currentTestimonial =
+              (this.currentTestimonial + 1) % this.testimonials.length;
+          },
+          nextTestimonial() {
+            this.currentTestimonial =
+              (this.currentTestimonial + 1) % this.testimonials.length;
+          },
+          prevTestimonial() {
+            this.currentTestimonial =
+              this.currentTestimonial === 0
+                ? this.testimonials.length - 1
+                : this.currentTestimonial - 1;
+          },
+        };
+      }
+    </script>
+  </body>
+</html>
