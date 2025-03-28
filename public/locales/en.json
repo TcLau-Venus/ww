@@ -1,0 +1,131 @@
+{
+  "nav": {
+    "aboutUs": "About Us",
+    "services": "Services",
+    "contactUs": "Contact Us",
+    "legal": "Legal",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "title": "Plan Your Dream Trip with Future AI-Powered Recommendations",
+    "subtitle": "Discover personalized itineraries and local insights—coming soon!",
+    "cta": "Stay Updated!"
+  },
+  "features": {
+    "title": "Why Choose WanderWise",
+    "subtitle": "Learn how our upcoming AI-powered platform will enhance your travel experience",
+    "items": {
+      "personalization": {
+        "title": "Smart Personalization",
+        "description": "Our advanced AI technology will provide personalized trail recommendations based on your preferences and past experiences."
+      },
+      "safety": {
+        "title": "Enhanced Safety",
+        "description": "Real-time Dangerous Animal Detection will keep you informed of nearby hazards during your adventures."
+      },
+      "health": {
+        "title": "Health Monitoring",
+        "description": "Our built-in SOS function will feature health monitoring tools to estimate stamina and predict potential risks."
+      },
+      "community": {
+        "title": "Community Insights",
+        "description": "Connect with fellow adventurers to share experiences and gain valuable trail insights."
+      },
+      "offline": {
+        "title": "Offline Access",
+        "description": "Download maps and trail information for reliable access, even without an internet connection."
+      },
+      "routes": {
+        "title": "Route Planning",
+        "description": "Our advanced algorithms will create optimal routes based on your fitness level and preferences."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "What Our Adventurers Say",
+      "sarah": {
+        "name": "Sarah Mitchell",
+        "role": "Adventure Enthusiast",
+        "quote": "WanderWise is set to help travelers discover hidden gems! I can't wait for the AI recommendations!"
+      },
+      "james": {
+        "name": "James Cooper",
+        "role": "Hiking Expert",
+        "quote": "As an avid hiker, I'm excited about the potential for personalized trail suggestions from WanderWise."
+      },
+      "emma": {
+        "name": "Emma Thompson",
+        "role": "Travel Blogger",
+        "quote": "The local insights feature will be a game-changer—like having a local guide in your pocket!"
+      }
+  },
+  "cta": {
+    "title": "Ready to Start Your Journey?",
+    "subtitle": "Join us as we develop WanderWise and prepare to discover your perfect trails.",
+    "button": "Stay Updated"
+  },
+  "footer": {
+    "copyright": "© 2025 WanderWise.ai. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact"
+  },
+  "language": {
+    "en": "English",
+    "zh-TW": "繁體中文"
+  },
+  "about": {
+    "title": "Revolutionizing Adventure Travel",
+    "description": "At WanderWise.ai, we believe everyone deserves to experience the perfect adventure. Our mission is to combine artificial intelligence with human expertise to create personalized travel experiences that inspire, challenge, and transform. Currently, we are in the research and development phase, working diligently to bring our vision to life.",
+    "cards": {
+      "vision": {
+        "title": "Our Vision",
+        "description": "To become the world's most trusted AI-powered travel companion, making outdoor adventures accessible and memorable for everyone."
+      },
+      "values": {
+        "title": "Our Values",
+        "description": "Innovation, sustainability, and authenticity guide everything we do. We're committed to preserving the natural world while helping people explore it."
+      },
+      "impact": {
+        "title": "Our Impact",
+        "description": "Though we are still in development, we aim to help travelers discover their perfect trails while promoting responsible tourism and supporting local communities."
+      }
+    }
+  },
+  "team": {
+    "title": "Meet Our Team",
+    "members": {
+      "0": {
+        "name": "Alexandra Chen",
+        "role": "Founder & CEO",
+        "bio": "Former AI researcher with a passion for hiking and outdoor adventures."
+      },
+      "1": {
+        "name": "David Rodriguez",
+        "role": "CTO",
+        "bio": "Tech innovator with 15+ years experience in AI and machine learning."
+      },
+      "2": {
+        "name": "Mei Lin",
+        "role": "Head of User Experience",
+        "bio": "Designer and avid traveler focused on creating intuitive digital experiences."
+      },
+      "3": {
+        "name": "Jason Patel",
+        "role": "Adventure Consultant",
+        "bio": "Professional guide with experience on trails across six continents."
+      }
+    }
+  },
+  "story": {
+    "title": "Our Story",
+    "paragraph1": "Founded in 2023, WanderWise.ai emerged from a simple observation: while travel planning tools were abundant, none truly understood the individual needs and aspirations of adventure seekers.",
+    "paragraph2": "Our founder, Alexandra Chen, experienced this firsthand during her years of solo travel. Despite extensive research, she often found herself on trails that didn't match her skill level or preferences.",
+    "paragraph3": "Combining her expertise in AI with her passion for outdoor adventures, she assembled a team of technology experts and seasoned travelers to create WanderWise.ai - a platform that understands not just where you want to go, but why you want to go there. We are currently focused on research and development to ensure our platform meets the needs of adventure seekers.",
+    "stats": {
+      "users": "Active Users (Coming Soon)",
+      "trails": "Trails Mapped (In Development)",
+      "success": "Success Rate (To Be Determined)"
+    }
+  }
+}
