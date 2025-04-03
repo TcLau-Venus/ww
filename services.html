@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WanderWise.ai - AI-Powered Travel Recommendations</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles_services.css" type="text/css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+        <script src="scripts.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const userLang = navigator.language || 'en';
+                setLanguage(userLang.startsWith('zh') ? 'zh' : 'en');
+            });
+        </script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+            defer
+        ></script>
+        </head>
+        <body
+        x-data="{
+          members: [],
+          isMobileMenuOpen: false,
+          isDarkMode: false,
+          initMembers() {
+            this.members = Array.from({ length: 4 }, (_, index) => ({
+              name: translations[currentLanguage].team.members[index].name,
+              role: translations[currentLanguage].team.members[index].role,
+              bio: translations[currentLanguage].team.members[index].bio,
+              image: 'https://placehold.co/400x400',
+            }));
+          },
+          toggleMobileMenu() {
+            this.isMobileMenuOpen = !this.isMobileMenuOpen;
+          },
+          toggleTheme() {
+            this.isDarkMode = !this.isDarkMode;
+            if (this.isDarkMode) {
+              document.documentElement.classList.add('dark-mode');
+              document.documentElement.classList.remove('light-mode');
+            } else {
+              document.documentElement.classList.add('light-mode');
+              document.documentElement.classList.remove('dark-mode');
+            }
+          }
+        }"
+        x-init="initMembers()"
+        :class="isDarkMode ? 'dark-mode' : 'light-mode'"
+        class="site-wrapper"
+      >
+    <div class="hamburger-icon" @click="toggleMobileMenu()">
+      <span :class="isMobileMenuOpen ? 'rotate-top' : ''"></span>
+      <span :class="isMobileMenuOpen ? 'hidden-middle' : ''"></span>
+      <span :class="isMobileMenuOpen ? 'rotate-bottom' : ''"></span>
+    </div>
+
+    <header class="site-header">
+      <div class="header-container">
+        <div class="logo-container">
+          <a href="index.html" class="logo-link">
+            <img
+              src="display/logo.png"
+              alt="WanderWise.ai logo"
+              class="logo-image"
+            />
+          </a>
+            <h1 class="logo-text">WanderWise.ai</h1>
+        </div>
+
+        <nav class="desktop-nav">
+          <ul class="nav-links">
+            <li>
+              <a href="aboutus.html" class="nav-link" data-i18n="nav.aboutUs"></a>
+            </li>
+            <li>
+              <a href="services.html" class="nav-link" data-i18n="nav.services"></a>
+            </li>
+          </ul>
+
+          <div class="nav-controls">
+            <div class="theme-language-controls">
+              <button
+                class="theme-toggle"
+                @click="toggleTheme()"
+                :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+              >
+                <span x-show="isDarkMode">🌞</span>
+                <span x-show="!isDarkMode">🌙</span>
+              </button>
+
+              <button class="language-toggle" aria-label="Switch language" @click="setLanguage(currentLanguage === 'en' ? 'zh' : 'en')">
+                <span x-show="currentLanguage === 'zh'">EN</span>
+                <span x-show="currentLanguage === 'en'">中文</span>
+              </button>
+            </div>
+
+            <button class="cta-button" data-i18n="nav.getStarted"></button>
+          </div>
+        </nav>
+
+        <button
+          class="mobile-menu-toggle"
+          @click="toggleMobileMenu()"
+          aria-label="Toggle navigation menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" :class="isMobileMenuOpen ? 'open' : ''">
+      <div class="mobile-menu-container">
+        <div class="mobile-menu-header">
+          <div class="mobile-logo">
+            <a href="index.html" class="mobile-logo-link">
+              <img
+                src="display/logo.png"
+                alt="WanderWise.ai logo"
+                class="mobile-logo-image"
+              />
+            </a>
+              <span class="mobile-logo-text">WanderWise.ai</span>
+          </div>
+          <button
+            class="close-menu"
+            @click="toggleMobileMenu()"
+            aria-label="Close menu"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="close-icon"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <nav class="mobile-nav">
+          <a
+            href="aboutus.html"
+            class="mobile-nav-link"
+            @click="toggleMobileMenu()"
+            data-i18n="nav.aboutUs"
+          ></a>
+          <a
+            href="services.html"
+            class="mobile-nav-link"
+            @click="toggleMobileMenu()"
+            data-i18n="nav.services"
+          ></a>
+        </nav>
+
+        <div class="mobile-controls">
+          <button class="mobile-theme-toggle" @click="toggleTheme(); toggleMobileMenu()">
+            <span x-show="isDarkMode">🌞</span>
+            <span x-show="!isDarkMode">🌙</span>
+          </button>
+          <button class="mobile-language-toggle" aria-label="Switch language" @click="setLanguage(currentLanguage === 'en' ? 'zh' : 'en'); toggleMobileMenu()">
+            <span class="lang-zh">中文</span>
+            <span class="lang-en">EN</span>
+          </button>
+        </div>
+
+        <button
+          class="mobile-cta-button"
+          @click="toggleMobileMenu()"
+          data-i18n="nav.getStarted"
+        ></button>
+      </div>
+    </div>
+
+    <main>
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+      <div class="section-container">
+        <div class="section-header">
+          <h2 class="section-title" data-i18n="services.title"></h2>
+          <p class="section-description" data-i18n="services.description"></p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-content">
+              <div class="feature-icon-container">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#007B7F"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="feature-title" data-i18n="services.cards.recommendation.title"></h3>
+                <ul class="feature-list" data-i18n="services.cards.recommendation.description"></ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-content">
+              <div class="feature-icon-container">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#007B7F"
+                  stroke-width="2"
+                >
+                  <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+                  <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="feature-title" data-i18n="services.cards.detection.title"></h3>
+                <ul class="feature-list" data-i18n="services.cards.detection.description"></ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-content">
+              <div class="feature-icon-container">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#007B7F"
+                  stroke-width="2"
+                >
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="feature-title" data-i18n="services.cards.monitoring.title"></h3>
+                <ul class="feature-list" data-i18n="services.cards.monitoring.description"></ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-content">
+              <div class="feature-icon-container">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#007B7F"
+                  stroke-width="2"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="feature-title" data-i18n="services.cards.sos.title"></h3>
+                <ul class="feature-list" data-i18n="services.cards.sos.description"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works-section">
+      <div class="section-container">
+        <div class="section-header">
+          <h2 class="section-title" data-i18n="howItWorks.title"></h2>
+          <p class="section-description" data-i18n="howItWorks.description"></p>
+        </div>
+
+        <div class="process-container">
+          <div class="process-line"></div>
+
+          <div class="process-grid">
+            <div class="process-card">
+              <div class="process-content">
+                <div class="process-icon-container">
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+                      d="M20 4h-3.17L15 2H9L7.17 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3 class="process-title" data-i18n="howItWorks.steps.cv.title"></h3>
+                <p class="process-description" data-i18n="howItWorks.steps.cv.description"></p>
+              </div>
+            </div>
+
+            <div class="process-card">
+              <div class="process-content">
+                <div class="process-icon-container">
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                    ></path>
+                  </svg>
+                </div>
+                <h3 class="process-title" data-i18n="howItWorks.steps.ml.title"></h3>
+                <p class="process-description" data-i18n="howItWorks.steps.ml.description"></p>
+              </div>
+            </div>
+
+            <div class="process-card">
+              <div class="process-content">
+                <div class="process-icon-container">
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                  >
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                  </svg>
+                </div>
+                <h3 class="process-title" data-i18n="howItWorks.steps.biometric.title"></h3>
+                <p class="process-description" data-i18n="howItWorks.steps.biometric.description"></p>
+              </div>
+            </div>
+
+            <div class="process-card">
+              <div class="process-content">
+                <div class="process-icon-container">
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3 class="process-title" data-i18n="howItWorks.steps.dataIntegration.title"></h3>
+                <p class="process-description" data-i18n="howItWorks.steps.dataIntegration.description"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+      <section class="cta-section">
+        <div class="section-container">
+          <div class="cta-container">
+            <h2 class="cta-title" data-i18n="cta.title"></h2>
+            <p class="cta-description" data-i18n="cta.subtitle"></p>
+            <button class="cta-button-large" data-i18n="cta.button"></button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <p class="copyright" data-i18n="footer.copyright"></p>
+        <div class="footer-links">
+          <a href="/privacy" class="footer-link" data-i18n="footer.privacy"></a>
+          <a href="/terms" class="footer-link" data-i18n="footer.terms"></a>
+          <a href="/contact" class="footer-link" data-i18n="footer.contact"></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

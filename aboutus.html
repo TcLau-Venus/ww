@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WanderWise.ai - AI-Powered Travel Recommendations</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles_aboutus.css" type="text/css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+        <script src="scripts.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const userLang = navigator.language || 'en';
+                setLanguage(userLang.startsWith('zh') ? 'zh' : 'en');
+            });
+        </script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+            defer
+        ></script>
+    </head>
+  <body
+    x-data="{
+      members: [],
+      isMobileMenuOpen: false,
+      isDarkMode: false,
+      initMembers() {
+        this.members = Array.from({ length: 4 }, (_, index) => ({
+          name: translations[currentLanguage].team.members[index].name,
+          role: translations[currentLanguage].team.members[index].role,
+          bio: translations[currentLanguage].team.members[index].bio,
+          image: 'https://placehold.co/400x400',
+        }));
+      },
+      toggleMobileMenu() {
+        this.isMobileMenuOpen = !this.isMobileMenuOpen;
+      },
+      toggleTheme() {
+        this.isDarkMode = !this.isDarkMode;
+        if (this.isDarkMode) {
+          document.documentElement.classList.add('dark-mode');
+          document.documentElement.classList.remove('light-mode');
+        } else {
+          document.documentElement.classList.add('light-mode');
+          document.documentElement.classList.remove('dark-mode');
+        }
+      }
+    }"
+    x-init="initMembers()"
+    :class="isDarkMode ? 'dark-mode' : 'light-mode'"
+    class="site-wrapper"
+  >
+    <div class="hamburger-icon" @click="toggleMobileMenu()">
+      <span :class="isMobileMenuOpen ? 'rotate-top' : ''"></span>
+      <span :class="isMobileMenuOpen ? 'hidden-middle' : ''"></span>
+      <span :class="isMobileMenuOpen ? 'rotate-bottom' : ''"></span>
+    </div>
+
+    <header class="site-header">
+      <div class="header-container">
+        <div class="logo-container">
+          <a href="index.html" class="logo-link">
+            <img
+              src="display/logo.png"
+              alt="WanderWise.ai logo"
+              class="logo-image"
+            />
+          </a>
+            <h1 class="logo-text">WanderWise.ai</h1>
+        </div>
+
+        <nav class="desktop-nav">
+          <ul class="nav-links">
+            <li>
+              <a href="aboutus.html" class="nav-link" data-i18n="nav.aboutUs"></a>
+            </li>
+            <li>
+              <a href="services.html" class="nav-link" data-i18n="nav.services"></a>
+            </li>
+          </ul>
+
+          <div class="nav-controls">
+            <div class="theme-language-controls">
+              <button
+                class="theme-toggle"
+                @click="toggleTheme()"
+                :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+              >
+                <span x-show="isDarkMode">🌞</span>
+                <span x-show="!isDarkMode">🌙</span>
+              </button>
+
+              <button class="language-toggle" aria-label="Switch language" @click="setLanguage(currentLanguage === 'en' ? 'zh' : 'en')">
+                <span x-show="currentLanguage === 'zh'">EN</span>
+                <span x-show="currentLanguage === 'en'">中文</span>
+              </button>
+            </div>
+
+            <button class="cta-button" data-i18n="nav.getStarted"></button>
+          </div>
+        </nav>
+
+        <button
+          class="mobile-menu-toggle"
+          @click="toggleMobileMenu()"
+          aria-label="Toggle navigation menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" :class="isMobileMenuOpen ? 'open' : ''">
+      <div class="mobile-menu-container">
+        <div class="mobile-menu-header">
+          <div class="mobile-logo">
+            <a href="index.html" class="mobile-logo-link">
+              <img
+                src="display/logo.png"
+                alt="WanderWise.ai logo"
+                class="mobile-logo-image"
+              />
+            </a>
+              <span class="mobile-logo-text">WanderWise.ai</span>
+          </div>
+          <button
+            class="close-menu"
+            @click="toggleMobileMenu()"
+            aria-label="Close menu"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="close-icon"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <nav class="mobile-nav">
+          <a
+            href="aboutus.html"
+            class="mobile-nav-link"
+            @click="toggleMobileMenu()"
+            data-i18n="nav.aboutUs"
+          ></a>
+          <a
+            href="services.html"
+            class="mobile-nav-link"
+            @click="toggleMobileMenu()"
+            data-i18n="nav.services"
+          ></a>
+        </nav>
+
+        <div class="mobile-controls">
+          <button class="mobile-theme-toggle" @click="toggleTheme(); toggleMobileMenu()">
+            <span x-show="isDarkMode">🌞</span>
+            <span x-show="!isDarkMode">🌙</span>
+          </button>
+          <button class="mobile-language-toggle" aria-label="Switch language" @click="setLanguage(currentLanguage === 'en' ? 'zh' : 'en'); toggleMobileMenu()">
+            <span x-show="currentLanguage === 'zh'">EN</span>
+            <span x-show="currentLanguage === 'en'">中文</span>
+          </button>
+        </div>
+
+        <button
+          class="mobile-cta-button"
+          @click="toggleMobileMenu()"
+          data-i18n="nav.getStarted"
+        ></button>
+      </div>
+    </div>
+
+    <main>
+      <!-- About Section -->
+      <section class="about-section">
+        <div class="section-container">
+          <h2 class="section-title" data-i18n="about.title"></h2>
+          <p class="section-description" data-i18n="about.description"></p>
+
+          <div class="values-grid">
+            <div class="value-card" :class="{'dark-value-card': isDarkMode}">
+              <h3 class="value-title" data-i18n="about.cards.vision.title"></h3>
+              <p class="value-description" data-i18n="about.cards.vision.description"></p>
+            </div>
+            <div class="value-card" :class="{'dark-value-card': isDarkMode}">
+              <h3 class="value-title" data-i18n="about.cards.values.title"></h3>
+              <p class="value-description" data-i18n="about.cards.vision.description"></p>
+            </div>
+            <div class="value-card" :class="{'dark-value-card': isDarkMode}">
+              <h3 class="value-title" data-i18n="about.cards.impact.title"></h3>
+              <p class="value-description" data-i18n="about.cards.impact.description"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Team Section -->
+      <section id="team" class="team-section" :class="{'dark-team-section': isDarkMode}">
+        <div class="section-container">
+          <h2 class="section-title" data-i18n="team.title"></h2>
+          <div class="team-grid">
+            <template x-for="(member, index) in members" :key="index">
+              <div class="team-card" :class="{'dark-team-card': isDarkMode}">
+                <img :src="member.image" :alt="member.name" class="team-image" />
+                <h3 class="team-name" x-text="member.name"></h3>
+                <p class="team-role" :class="{'dark-team-role': isDarkMode}" x-text="member.role"></p>
+                <p class="team-bio" :class="{'dark-team-bio': isDarkMode}" x-text="member.bio"></p>
+              </div>
+            </template>
+          </div>
+        </div>
+      </section>
+
+      <!-- Story Section -->
+      <section class="story-section">
+        <div class="story-grid">
+          <div class="story-content">
+            <h2 class="section-title" data-i18n="story.title"></h2>
+            <div class="story-paragraphs">
+              <p class="story-paragraph" :class="{'dark-story-paragraph': isDarkMode}" data-i18n="story.paragraph1"></p>
+              <p class="story-paragraph" :class="{'dark-story-paragraph': isDarkMode}" data-i18n="story.paragraph2"></p>
+              <p class="story-paragraph" :class="{'dark-story-paragraph': isDarkMode}" data-i18n="story.paragraph3"></p>
+            </div>
+            <div class="stats-container">
+              <div class="stat-item">
+                <h4 class="stat-number"><span class="stat-value">50K+</span></h4>
+                <p class="stat-label" :class="{'dark-stat-label': isDarkMode}" data-i18n="story.stats.users"></p>
+              </div>
+              <div class="stat-item">
+                <h4 class="stat-number"><span class="stat-value">1000+</span></h4>
+                <p class="stat-label" :class="{'dark-stat-label': isDarkMode}" data-i18n="story.stats.trails"></p>
+              </div>
+              <div class="stat-item">
+                <h4 class="stat-number"><span class="stat-value">98%</span></h4>
+                <p class="stat-label" :class="{'dark-stat-label': isDarkMode}" data-i18n="story.stats.success"></p>
+              </div>
+            </div>
+          </div>
+          <div class="story-image-container">
+            <img src="https://placehold.co/600x800" alt="Our journey" class="story-image" />
+            <div class="image-badge">Est. 2024</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <p class="copyright" data-i18n="footer.copyright"></p>
+        <div class="footer-links">
+          <a href="/privacy" class="footer-link" data-i18n="footer.privacy"></a>
+          <a href="/terms" class="footer-link" data-i18n="footer.terms"></a>
+          <a href="/contact" class="footer-link" data-i18n="footer.contact"></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
