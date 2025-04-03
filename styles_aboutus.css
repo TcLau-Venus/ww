@@ -747,10 +747,10 @@ line-height: 1.7;
 }
 
 .values-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 2rem;
-margin-bottom: 4.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4.5rem;
 }
 
 .value-card {
@@ -790,9 +790,9 @@ background-color: var(--dark-bg-tertiary);
 }
 
 .team-grid {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
 }
 
 .team-card {
