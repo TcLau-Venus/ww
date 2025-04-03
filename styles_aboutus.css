@@ -851,8 +851,8 @@ padding: 2rem 2.25rem 2.875rem;
 
 .story-grid {
 display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 4rem;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
 align-items: center;
 }
 
